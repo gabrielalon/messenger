@@ -1,16 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <div id="wrapper">
-        <div id="container">
-            show
+{% block body_id 'homepage' %}
 
+{% block body %}
+    <div class="row">
+        <div class="col-sm-6">
+            {{ message.getContent()|md2html }}
         </div>
     </div>
-{% endblock %}
-
-{% block stylesheets %}
-    <style>
-        body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
-    </style>
 {% endblock %}

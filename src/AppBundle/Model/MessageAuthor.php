@@ -2,6 +2,7 @@
 
 namespace AppBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -46,6 +47,24 @@ class MessageAuthor
      * @ORM\Column(type="string", length=12)
      */
     private $phone;
+
+    /**
+     * @ORM\OneToMany(
+     *      targetEntity="Message",
+     *      mappedBy="post",
+     *      orphanRemoval=true
+     * )
+     * @ORM\OrderBy({"createdAt" = "ASC"})
+     */
+    private $messages;
+
+    /**
+     * MessageAuthor constructor.
+     */
+    public function __construct()
+    {
+        $this->messages = new ArrayCollection();
+    }
 
     /**
      * @param $id

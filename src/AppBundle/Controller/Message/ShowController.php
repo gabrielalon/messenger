@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Message;
 
+use AppBundle\Model\Message;
 use AppBundle\Repository\MessageRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,9 +28,9 @@ class ShowController extends Controller
      *
      * @param MessageRepository $messageRepository
      */
-    public function __construct(MessageRepository $messageRepository)
+    public function __construct(EntityManager $entityManager)
     {
-        $this->messageRepository = $messageRepository;
+        $this->messageRepository = $entityManager->getRepository('AppBundle:Message');
     }
 
     /**
@@ -37,7 +38,7 @@ class ShowController extends Controller
      *
      * @Route(
      *     path         = "/{_locale}/message/show/{messageId}",
-     *     name         = "message_list",
+     *     name         = "message_show",
      *     requirements = {"messageId" = "\d+"}
      * )
      * @Cache(maxage=3600)
@@ -47,8 +48,21 @@ class ShowController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return array(
+        $messageId = $request->get('messageId');
 
+        /** @var Message $message */
+        $message = $this->messageRepository->find($messageId);
+
+        if (!$message) {
+            throw $this->createNotFoundException(
+                'No message: ' . $messageId
+            );
+        }
+
+
+        var_dump($message->getAuthor()); die;
+        return array(
+            'message' => $message
         );
     }
 }

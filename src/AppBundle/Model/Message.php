@@ -8,13 +8,13 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Message
  * @package AppBundle\Model
  * @ORM\Table
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\MessageRepository")
  */
 class Message
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -30,9 +30,16 @@ class Message
     private $authorId;
 
     /**
-     * @ORM\Column(type="string", , length=64555)
+     * @ORM\Column(type="text")
      */
     private $content;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="MessageAuthor", inversedBy="messages")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     * @var MessageAuthor
+     */
+    private $author;
 
     /**
      * @param $id
@@ -96,5 +103,14 @@ class Message
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * @return MessageAuthor
+     */
+    public function getAuthor()
+    {
+        $this->author->__load();
+        return $this->author;
     }
 }
