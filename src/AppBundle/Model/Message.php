@@ -35,11 +35,26 @@ class Message
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MessageAuthor", inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Model\MessageAuthor", inversedBy="messages")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
-     * @var MessageAuthor
      */
     private $author;
+
+    /**
+     * @return MessageAuthor
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param MessageAuthor $author
+     */
+    public function setAuthor(MessageAuthor $author)
+    {
+        $this->author = $author;
+    }
 
     /**
      * @param $id
@@ -103,14 +118,5 @@ class Message
     public function getContent()
     {
         return $this->content;
-    }
-
-    /**
-     * @return MessageAuthor
-     */
-    public function getAuthor()
-    {
-        $this->author->__load();
-        return $this->author;
     }
 }

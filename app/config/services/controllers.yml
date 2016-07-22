@@ -1,0 +1,14 @@
+
+services:
+    message_list_controller:
+        class: 'AppBundle\Controller\Message\ListController'
+        arguments: ['@doctrine.orm.entity_manager']
+    message_show_controller:
+        class: 'AppBundle\Controller\Message\ShowController'
+        arguments: ['@doctrine.orm.entity_manager']
+    message_new_controller:
+        class: 'AppBundle\Controller\Message\NewController'
+        arguments: ['@doctrine.orm.entity_manager']
+    main_index_controller:
+        class: 'AppBundle\Controller\Main\IndexController'
+        arguments: ['@doctrine.orm.entity_manager']

@@ -6,6 +6,8 @@
     <div class="row">
         <div class="col-sm-6">
             {{ message.getContent()|md2html }}
+
+            {{ message.getAuthor().getEmail() }}
         </div>
     </div>
 {% endblock %}

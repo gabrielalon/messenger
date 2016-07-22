@@ -1,0 +1,9 @@
+
+services:
+    app.log.formatter:
+        class:  'Monolog\Formatter\LineFormatter'
+        public: false
+        arguments:
+            - '%%level_name%% [%%datetime%%] [%%channel%%] %%message%%\n %%context%%\n\n'
+            - 'H:i:s'
+            - false

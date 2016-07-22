@@ -59,8 +59,6 @@ class ShowController extends Controller
             );
         }
 
-
-        var_dump($message->getAuthor()); die;
         return array(
             'message' => $message
         );

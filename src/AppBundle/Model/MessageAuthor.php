@@ -50,7 +50,7 @@ class MessageAuthor
 
     /**
      * @ORM\OneToMany(
-     *      targetEntity="Message",
+     *      targetEntity="AppBundle\Model\Message",
      *      mappedBy="post",
      *      orphanRemoval=true
      * )
