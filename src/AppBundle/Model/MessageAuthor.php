@@ -51,7 +51,7 @@ class MessageAuthor
     /**
      * @ORM\OneToMany(
      *      targetEntity="AppBundle\Model\Message",
-     *      mappedBy="post",
+     *      mappedBy="author",
      *      orphanRemoval=true
      * )
      * @ORM\OrderBy({"createdAt" = "ASC"})

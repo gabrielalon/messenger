@@ -2,10 +2,10 @@
 services:
     message_list_controller:
         class: 'AppBundle\Controller\Message\ListController'
-        arguments: ['@doctrine.orm.entity_manager']
+        arguments: ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:Message")']
     message_show_controller:
         class: 'AppBundle\Controller\Message\ShowController'
-        arguments: ['@doctrine.orm.entity_manager']
+        arguments: ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:Message")']
     message_new_controller:
         class: 'AppBundle\Controller\Message\NewController'
         arguments: ['@doctrine.orm.entity_manager']

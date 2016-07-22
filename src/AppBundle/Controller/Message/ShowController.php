@@ -28,9 +28,9 @@ class ShowController extends Controller
      *
      * @param MessageRepository $messageRepository
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(MessageRepository $messageRepository)
     {
-        $this->messageRepository = $entityManager->getRepository('AppBundle:Message');
+        $this->messageRepository = $messageRepository;
     }
 
     /**

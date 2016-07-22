@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller\Message;
 
+use AppBundle\Form\MessageType;
+use AppBundle\Model\Message;
+use AppBundle\Model\MessageAuthor;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -42,8 +45,13 @@ class NewController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return array(
+        $message = new Message();
+        $message->setAuthor(new MessageAuthor());
 
+        $form = $this->createForm(new MessageType(), $message);
+
+        return array(
+            'form' => $form
         );
     }
 }
