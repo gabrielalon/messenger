@@ -2,13 +2,21 @@
 services:
     message_list_controller:
         class: 'AppBundle\Controller\Message\ListController'
+        calls:
+             - [setContainer, ['@service_container']]
         arguments: ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:Message")']
     message_show_controller:
         class: 'AppBundle\Controller\Message\ShowController'
+        calls:
+             - [setContainer, ['@service_container']]
         arguments: ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:Message")']
     message_new_controller:
         class: 'AppBundle\Controller\Message\NewController'
+        calls:
+             - [setContainer, ['@service_container']]
         arguments: ['@doctrine.orm.entity_manager']
     main_index_controller:
         class: 'AppBundle\Controller\Main\IndexController'
+        calls:
+             - [setContainer, ['@service_container']]
         arguments: ['@doctrine.orm.entity_manager']

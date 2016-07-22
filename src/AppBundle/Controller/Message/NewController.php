@@ -48,6 +48,7 @@ class NewController extends Controller
         $message = new Message();
         $message->setAuthor(new MessageAuthor());
 
+//        var_dump(get_class($this->container->get('form.factory'))); die;
         $form = $this->createForm(new MessageType(), $message);
 
         return array(

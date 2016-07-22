@@ -3,6 +3,7 @@
 namespace AppBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraint as Assert;
 
 /**
  * Class Message
@@ -37,6 +38,7 @@ class Message
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Model\MessageAuthor", inversedBy="messages")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     * @Assert\Type(type="AppBundle\Model\MessageAuthor")
      */
     private $author;
 
