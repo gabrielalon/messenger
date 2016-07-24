@@ -2,8 +2,8 @@
 
 namespace AppBundle\Controller\Main;
 
+use AppBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  * @package AppBundle\Controller\Home
  * @Route(service="main_index_controller")
  */
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     /**
      * @param Request $request
@@ -38,7 +38,7 @@ class IndexController extends Controller
      *
      * @return array
      */
-    public function __invoke(Request $request)
+    public function onInvoke(Request $request)
     {
         return array(
 

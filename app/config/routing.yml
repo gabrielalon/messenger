@@ -14,6 +14,6 @@ root:
         permanent: true
 
 api:
-    resource: "@ApiBundle/Resources/config/routes.yml"
-    type:     rest
-    prefix:   /api
+    resource: "@ApiBundle/Controller"
+    type:     annotation
+    prefix:   /api/v1

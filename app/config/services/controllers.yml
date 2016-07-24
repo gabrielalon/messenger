@@ -48,3 +48,15 @@ services:
         class: 'AppBundle\Controller\MessageAuthor\ShowController'
         calls:
              - [setMessageRepository, ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:Message")']]
+
+    api_main_index_controller:
+        parent: abstract_controller
+        class: 'ApiBundle\Controller\Main\IndexController'
+
+    api_message_get_controller:
+        parent: abstract_message_controller
+        class: 'ApiBundle\Controller\Message\GetController'
+
+    api_message_author_get_controller:
+        parent: abstract_message_author_controller
+        class: 'ApiBundle\Controller\MessageAuthor\GetController'
