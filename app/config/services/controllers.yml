@@ -1,22 +1,50 @@
 
 services:
+    abstract_controller:
+        abstract: true
+        calls:
+             - [setContainer, ['@service_container']]
+
+    abstract_message_controller:
+        parent: abstract_controller
+        abstract: true
+        calls:
+             - [setMessageRepository, ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:Message")']]
+
+    abstract_message_author_controller:
+        parent: abstract_controller
+        abstract: true
+        calls:
+             - [setMessageAuthorRepository, ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:MessageAuthor")']]
+
+    main_index_controller:
+        parent: abstract_controller
+        class: 'AppBundle\Controller\Main\IndexController'
+
     message_list_controller:
+        parent: abstract_message_controller
         class: 'AppBundle\Controller\Message\ListController'
-        calls:
-             - [setContainer, ['@service_container']]
-        arguments: ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:Message")']
+
     message_show_controller:
+        parent: abstract_message_controller
         class: 'AppBundle\Controller\Message\ShowController'
-        calls:
-             - [setContainer, ['@service_container']]
-        arguments: ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:Message")']
+
+    message_delete_controller:
+        parent: abstract_message_controller
+        class: 'AppBundle\Controller\Message\DeleteController'
+
     message_new_controller:
+        parent: abstract_message_controller
         class: 'AppBundle\Controller\Message\NewController'
         calls:
-             - [setContainer, ['@service_container']]
-        arguments: ['@doctrine.orm.entity_manager']
-    main_index_controller:
-        class: 'AppBundle\Controller\Main\IndexController'
+             - [setMessageAuthorRepository, ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:MessageAuthor")']]
+
+    message_author_list_controller:
+        parent: abstract_message_author_controller
+        class: 'AppBundle\Controller\MessageAuthor\ListController'
+
+    message_author_show_controller:
+        parent: abstract_message_author_controller
+        class: 'AppBundle\Controller\MessageAuthor\ShowController'
         calls:
-             - [setContainer, ['@service_container']]
-        arguments: ['@doctrine.orm.entity_manager']
+             - [setMessageRepository, ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:Message")']]

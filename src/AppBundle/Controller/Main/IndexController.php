@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller\Main;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -17,27 +16,25 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class IndexController extends Controller
 {
     /**
-     * @var EntityManager
-     */
-    protected $entityManager;
-
-    /**
-     * IndexController constructor.
-     *
-     * @param EntityManager $entityManager
-     */
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
-    /**
      * @param Request $request
      *
-     * @Route("/", name = "homepage")
-     * @Route("/{_locale}/", name = "homepage_locale")
-     * @Cache(maxage=3600)
-     * @Template("main/index.html.twig")
+     * @Route(
+     *     path = "/",
+     *     name = "homepage"
+     * )
+     *
+     * @Route(
+     *     path = "/{_locale}/",
+     *     name = "homepage_locale"
+     * )
+     *
+     * @Cache(
+     *     maxage = 3600
+     * )
+     *
+     * @Template(
+     *     "main/index.html.twig"
+     * )
      *
      * @return array
      */

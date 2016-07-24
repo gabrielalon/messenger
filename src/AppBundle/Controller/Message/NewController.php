@@ -2,12 +2,13 @@
 
 namespace AppBundle\Controller\Message;
 
+use AppBundle\Controller\BaseController;
 use AppBundle\Form\MessageType;
 use AppBundle\Model\Message;
 use AppBundle\Model\MessageAuthor;
-use Doctrine\ORM\EntityManager;
+use AppBundle\Repository\MessageAuthorRepositoryAwareTrait;
+use AppBundle\Repository\MessageRepositoryAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -15,44 +16,73 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * Class NewController
  * @package AppBundle\Controller\Message
- * @Route(service="message_new_controller")
+ *
+ * @Route(
+ *     service = "message_new_controller"
+ * )
  */
-class NewController extends Controller
+class NewController extends BaseController
 {
-    /**
-     * @var EntityManager
-     */
-    protected $entityManager;
-
-    /**
-     * NewController constructor.
-     *
-     * @param EntityManager $entityManager
-     */
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
+    use MessageRepositoryAwareTrait;
+    use MessageAuthorRepositoryAwareTrait;
 
     /**
      * @param Request $request
      *
-     * @Route("/{_locale}/message/new", name="message_new")
-     * @Cache(maxage=3600)
-     * @Template("message/new.html.twig")
+     * @Route(
+     *     path = "/{_locale}/message/new",
+     *     name = "message_new"
+     * )
+     *
+     * @Cache(
+     *     maxage = 3600
+     * )
+     *
+     * @Template(
+     *     "message/new.html.twig"
+     * )
      *
      * @return array
      */
-    public function __invoke(Request $request)
+    public function onInvoke(Request $request)
     {
         $message = new Message();
-        $message->setAuthor(new MessageAuthor());
 
-//        var_dump(get_class($this->container->get('form.factory'))); die;
-        $form = $this->createForm(new MessageType(), $message);
+        $messageAuthor = null;
+        if ($request->isMethod('POST')) {
+            $messageData = $request->get('message');
+            /** @var MessageAuthor $messageAuthor */
+            $messageAuthor = $this->messageAuthorRepository
+                ->findOneByEmail($messageData['author']['email']);
+        }
+
+        if ($messageAuthor) {
+            $message->setAuthor($messageAuthor);
+        } else {
+            $message->setAuthor(new MessageAuthor());
+        }
+
+        $form = $this->createForm(MessageType::class, $message, array(
+            'action' => $this->generateUrl('message_new'),
+            'method' => 'POST'
+        ));
+
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($message);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                $this->getTranslator()->trans('notice.message_saved')
+            );
+
+            return $this->redirect($this->generateUrl('message_list'));
+        }
 
         return array(
-            'form' => $form
+            'form' => $form->createView()
         );
     }
 }

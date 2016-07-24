@@ -5,16 +5,17 @@ namespace AppBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraint as Assert;
 
 /**
  * Class MessageAuthor
  * @package AppBundle\Model
  * @ORM\Table
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\MessageAuthorRepository")
  */
 class MessageAuthor
 {
+    const NUM_ITEMS = 3;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -36,19 +37,16 @@ class MessageAuthor
 
     /**
      * @ORM\Column(type="string", length=64)
-     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=64)
-     * @Assert\NotBlank()
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=12)
-     * @Assert\NotBlank()
      */
     private $phone;
 

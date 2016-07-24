@@ -3,7 +3,6 @@
 namespace AppBundle\Controller\Message;
 
 use AppBundle\Controller\BaseController;
-use AppBundle\Model\Message;
 use AppBundle\Repository\MessageRepositoryAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -11,14 +10,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * Class ShowController
+ * Class DeleteController
  * @package AppBundle\Controller\Message
  *
  * @Route(
- *     service = "message_show_controller"
+ *     service = "message_delete_controller"
  * )
  */
-class ShowController extends BaseController
+class DeleteController extends BaseController
 {
     use MessageRepositoryAwareTrait;
 
@@ -26,8 +25,8 @@ class ShowController extends BaseController
      * @param Request $request
      *
      * @Route(
-     *     path         = "/{_locale}/message/show/{messageId}",
-     *     name         = "message_show",
+     *     path         = "/{_locale}/message/delete/{messageId}",
+     *     name         = "message_delete",
      *     requirements = {"messageId" = "\d+"}
      * )
      *
@@ -58,10 +57,20 @@ class ShowController extends BaseController
         }
 
         $form = $this->createDeleteForm($message);
+        $form->handleRequest($request);
 
-        return array(
-            'message' => $message,
-            'form' => $form->createView()
-        );
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->remove($message);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                $this->getTranslator()->trans('notice.message_deleted')
+            );
+        }
+
+        return $this->redirectToRoute('message_list');
     }
 }

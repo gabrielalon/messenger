@@ -1,0 +1,19 @@
+<div class="col-sm-8 blog-main">
+    {% for message in messages %}
+        <div class="blog-post">
+            <h2 class="blog-post-title">{{ message.content[:20] ~ '...' }}</h2>
+            <p class="blog-post-meta">
+                {{ message.createdAt|date('Y-m-d H:i:s') }} by
+                <a href="{{ path('message_show', { messageId: message.id }) }}">
+                    {{ message.getAuthor().name }}
+                </a>
+            </p>
+        </div>
+    {% else %}
+        <div class="well">{{ 'info.no_messages_found'|trans }}</div>
+    {% endfor %}
+
+    <div class="navigation text-center">
+        {{ pagerfanta(messages, 'twitter_bootstrap3_translated', { routeName: 'message_list_paginated' }) }}
+    </div>
+</div>

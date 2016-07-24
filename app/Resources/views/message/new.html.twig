@@ -1,16 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block body_id 'homepage' %}
+
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-            new form
+    <h1>{{ 'title.new_message'|trans }}</h1>
 
-        </div>
-    </div>
-{% endblock %}
-
-{% block stylesheets %}
-    <style>
-        body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
-    </style>
+    {{ include('message/_form.html.twig', {
+        form: form,
+        path_back_to_list: path('message_list')
+    }, with_context = false) }}
 {% endblock %}

@@ -3,7 +3,7 @@
 namespace AppBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraint as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class Message
@@ -13,6 +13,8 @@ use Symfony\Component\Validator\Constraint as Assert;
  */
 class Message
 {
+    const NUM_ITEMS = 3;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -22,6 +24,7 @@ class Message
 
     /**
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
@@ -36,9 +39,12 @@ class Message
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Model\MessageAuthor", inversedBy="messages")
+     * @ORM\ManyToOne(
+     *     targetEntity = "AppBundle\Model\MessageAuthor",
+     *     inversedBy = "messages",
+     *     cascade = {"persist"}
+     * )
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
-     * @Assert\Type(type="AppBundle\Model\MessageAuthor")
      */
     private $author;
 

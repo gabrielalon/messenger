@@ -5,10 +5,8 @@ parameters:
     database_name: messenger
     database_user: root
     database_password: null
-    locale: pl
-    app_locales: en|pl
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
-    secret: y12fE2~B7M3fe6#
+    secret: 'y12fE2~B7M3fe6#'

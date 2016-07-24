@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Controller\Message;
+namespace AppBundle\Controller\MessageAuthor;
 
 use AppBundle\Controller\BaseController;
-use AppBundle\Repository\MessageRepositoryAwareTrait;
+use AppBundle\Repository\MessageAuthorRepositoryAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,27 +11,27 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Class ListController
- * @package AppBundle\Controller\Message
+ * @package AppBundle\Controller\MessageAuthor
  *
  * @Route(
- *     service = "message_list_controller"
+ *     service = "message_author_list_controller"
  * )
  */
 class ListController extends BaseController
 {
-    use MessageRepositoryAwareTrait;
+    use MessageAuthorRepositoryAwareTrait;
 
     /**
      * @param Request $request
      *
      * @Route(
-     *     path = "/{_locale}/message/list",
-     *     name = "message_list"
+     *     path = "/{_locale}/message_author/list",
+     *     name = "message_author_list"
      * )
      *
      * @Route(
-     *     path         = "/{_locale}/message/list/{page}",
-     *     name         = "message_list_paginated",
+     *     path         = "/{_locale}/message_author/list/{page}",
+     *     name         = "message_author_list_paginated",
      *     requirements = {"page": "[1-9]\d*"}
      * )
      *
@@ -40,7 +40,7 @@ class ListController extends BaseController
      * )
      *
      * @Template(
-     *     "message/list.html.twig"
+     *     "message_author/list.html.twig"
      * )
      *
      * @return array
@@ -48,10 +48,10 @@ class ListController extends BaseController
     public function onInvoke(Request $request)
     {
         $page = $request->get('page', 1);
-        $messages = $this->messageRepository->findLatest($page);
+        $authors = $this->messageAuthorRepository->findLatest($page);
 
         return array(
-            'messages' => $messages
+            'authors' => $authors
         );
     }
 }

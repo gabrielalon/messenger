@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'homepage' %}
+
+{% block body %}
+    <div class="col-sm-8 blog-main">
+        {% for author in authors %}
+            <div class="blog-post">
+                <h2 class="blog-post-title">{{ author.getName() }}</h2>
+                <p class="blog-post-meta">
+                    {{ author.createdAt|date('Y-m-d H:i:s') }} by
+                    <a href="{{ path('message_author_show', { authorId: author.id }) }}">
+                        {{ author.getEmail() }}
+                    </a>
+                </p>
+            </div>
+        {% else %}
+            <div class="well">{{ 'info.no_message_authors_found'|trans }}</div>
+        {% endfor %}
+
+        <div class="navigation text-center">
+            {{ pagerfanta(authors, 'twitter_bootstrap3_translated', { routeName: 'message_author_list_paginated' }) }}
+        </div>
+    </div>
+{% endblock %}
