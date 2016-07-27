@@ -17,3 +17,8 @@ api:
     resource: "@ApiBundle/Controller"
     type:     annotation
     prefix:   /api/v1
+    defaults: {_format: 'json'}
+
+api_doc:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc

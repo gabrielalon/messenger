@@ -6,10 +6,8 @@ use ApiBundle\Controller\BaseController;
 use AppBundle\Model\MessageAuthor;
 use AppBundle\Repository\MessageAuthorRepositoryAwareTrait;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 /**
@@ -25,23 +23,27 @@ class GetController extends BaseController
     use MessageAuthorRepositoryAwareTrait;
 
     /**
-     * @param Request $request
      *
      * @ApiDoc(
      *     resource    = true,
-     *     description = "Displays hello world",
-     *     output      = "string",
+     *     description = "Displays message author model",
+     *     output      = "AppBundle\Model\MessageAuthor",
      *     statusCodes = {
-     *          200 = "Returned when successful"
+     *          200 = "Returned when successful",
+     *          404 = "Returned when message author not found"
      *     }
      * )
      *
      * @Rest\Get(
-     *     path         = "/message_author/get/{authorId}",
-     *     requirements = {"authorId" = "\d+"}
+     *     path         = "/message_author/get/{authorId}.{_format}",
+     *     requirements = {"authorId" = "\d+", "_format": "json|xml"}
      * )
      *
-     * @return View
+     * @Rest\View()
+     *
+     * @param Request $request
+     *
+     * @return array
      */
     public function onInvoke(Request $request)
     {
@@ -54,6 +56,6 @@ class GetController extends BaseController
             throw $this->createNotFoundException('Message author not found');
         }
 
-        return $this->view($messageAuthor, Response::HTTP_OK);
+        return $messageAuthor;
     }
 }

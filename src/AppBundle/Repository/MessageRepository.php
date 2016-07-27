@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Model\Message;
 use AppBundle\Model\MessageAuthor;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
@@ -15,6 +16,26 @@ use Pagerfanta\Pagerfanta;
  */
 class MessageRepository extends EntityRepository
 {
+    /**
+     * @param int $page
+     *
+     * @return array
+     */
+    public function findAllPaginated($page = 1)
+    {
+        $limit = Message::NUM_ITEMS;
+        $offset = $limit * max(0, $page - 1);
+
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT m
+                FROM AppBundle:Message m
+                ORDER BY m.createdAt DESC
+            ')
+            ->setMaxResults(Message::NUM_ITEMS)
+            ->setFirstResult($offset)
+            ->getResult();
+    }
     /**
      * @return Query
      */

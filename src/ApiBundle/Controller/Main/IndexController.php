@@ -3,10 +3,9 @@
 namespace ApiBundle\Controller\Main;
 
 use ApiBundle\Controller\BaseController;
+use ApiBundle\Model\Hello;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 /**
@@ -16,11 +15,11 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class IndexController extends BaseController
 {
     /**
-     * @param Request $request
+     * Hello world action
      *
      * @ApiDoc(
      *     resource    = true,
-     *     description = "Displays hello world",
+     *     description = "This is simple action that displays hello world",
      *     output      = "string",
      *     statusCodes = {
      *          200 = "Returned when successful"
@@ -28,13 +27,18 @@ class IndexController extends BaseController
      * )
      *
      * @Rest\Get(
-     *     path = "/",
+     *     path         = "/hello.{_format}",
+     *     requirements = {"_format": "json|xml"}
      * )
      *
-     * @return View
+     * @Rest\View()
+     *
+     * @param Request $request
+     *
+     * @return array
      */
     public function onInvoke(Request $request)
     {
-        return $this->view(['Hello world'], Response::HTTP_OK);
+        return new Hello('world');
     }
 }

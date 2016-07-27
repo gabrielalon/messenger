@@ -1,9 +1,14 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: marekrode
+ * Date: 27.07.2016
+ * Time: 11:20
+ */
 
 namespace ApiBundle\Controller\Message;
 
 use ApiBundle\Controller\BaseController;
-use AppBundle\Model\Message;
 use AppBundle\Repository\MessageRepositoryAwareTrait;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,24 +16,24 @@ use Symfony\Component\HttpFoundation\Request;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 /**
- * Class GetController
+ * Class ListController
  * @package ApiBundle\Controller\Message
  *
  * @Route(
- *     service = "api_message_get_controller"
+ *     service = "api_message_list_controller"
  * )
  */
-class GetController extends BaseController
+class ListController extends BaseController
 {
     use MessageRepositoryAwareTrait;
 
     /**
-     * This action return a message model
+     * This action returns a collection of message models
      *
      * @ApiDoc(
      *     resource    = true,
-     *     description = "Displays Message model",
-     *     output      = "AppBundle\Model\Message",
+     *     description = "Displays collection of Message model",
+     *     output      = "array",
      *     statusCodes = {
      *          200 = "Returned when successful",
      *          404 = "Returned when message not found"
@@ -36,8 +41,13 @@ class GetController extends BaseController
      * )
      *
      * @Rest\Get(
-     *     path         = "/message/get/{messageId}.{_format}",
-     *     requirements = {"messageId" = "\d+", "_format": "json|xml"}
+     *     path         = "/message/list.{_format}",
+     *     requirements = {"_format": "json|xml"}
+     * )
+     *
+     * @Rest\Get(
+     *     path         = "/message/list/{page}.{_format}",
+     *     requirements = {"page": "[1-9]\d*", "_format": "json|xml"}
      * )
      *
      * @Rest\View()
@@ -48,15 +58,9 @@ class GetController extends BaseController
      */
     public function onInvoke(Request $request)
     {
-        $messageId = $request->get('messageId');
+        $page = $request->get('page', 1);
+        $messages = $this->messageRepository->findAllPaginated($page);
 
-        /** @var Message $message */
-        $message = $this->messageRepository->find($messageId);
-
-        if (!$message) {
-            throw $this->createNotFoundException('Message not found');
-        }
-
-        return $message;
+        return $messages;
     }
 }

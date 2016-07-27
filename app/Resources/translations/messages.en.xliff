@@ -10,6 +10,10 @@
                 <source>title.new_message</source>
                 <target>New message</target>
             </trans-unit>
+            <trans-unit id="title.edit_message">
+                <source>title.edit_message</source>
+                <target>Edit message</target>
+            </trans-unit>
 
             <trans-unit id="label.author_name">
                 <source>label.author_name</source>
@@ -30,6 +34,10 @@
             <trans-unit id="label.create_message">
                 <source>label.create_message</source>
                 <target>Create message</target>
+            </trans-unit>
+            <trans-unit id="label.save_message">
+                <source>label.save_message</source>
+                <target>Save message</target>
             </trans-unit>
             <trans-unit id="label.confirm">
                 <source>label.confirm</source>
@@ -69,6 +77,10 @@
             <trans-unit id="action.message_delete">
                 <source>action.message_delete</source>
                 <target>Delete message</target>
+            </trans-unit>
+            <trans-unit id="action.message_edit">
+                <source>action.message_edit</source>
+                <target>Edit message</target>
             </trans-unit>
 
             <trans-unit id="info.no_messages_found">

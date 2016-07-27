@@ -39,6 +39,10 @@ services:
         calls:
              - [setMessageAuthorRepository, ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:MessageAuthor")']]
 
+    message_edit_controller:
+        parent: abstract_message_controller
+        class: 'AppBundle\Controller\Message\EditController'
+
     message_author_list_controller:
         parent: abstract_message_author_controller
         class: 'AppBundle\Controller\MessageAuthor\ListController'
@@ -56,6 +60,10 @@ services:
     api_message_get_controller:
         parent: abstract_message_controller
         class: 'ApiBundle\Controller\Message\GetController'
+
+    api_message_list_controller:
+        parent: abstract_message_controller
+        class: 'ApiBundle\Controller\Message\ListController'
 
     api_message_author_get_controller:
         parent: abstract_message_author_controller

@@ -5,7 +5,6 @@ namespace AppBundle\Controller\Message;
 use AppBundle\Controller\BaseController;
 use AppBundle\Repository\MessageRepositoryAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -33,10 +32,6 @@ class ListController extends BaseController
      *     path         = "/{_locale}/message/list/{page}",
      *     name         = "message_list_paginated",
      *     requirements = {"page": "[1-9]\d*"}
-     * )
-     *
-     * @Cache(
-     *     maxage = 3600
      * )
      *
      * @Template(

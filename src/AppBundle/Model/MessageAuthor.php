@@ -5,12 +5,14 @@ namespace AppBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class MessageAuthor
  * @package AppBundle\Model
  * @ORM\Table
  * @ORM\Entity(repositoryClass="AppBundle\Repository\MessageAuthorRepository")
+ * @Serializer\XmlRoot("message_author")
  */
 class MessageAuthor
 {
@@ -57,6 +59,7 @@ class MessageAuthor
      *      orphanRemoval=true
      * )
      * @ORM\OrderBy({"createdAt" = "ASC"})
+     * @Serializer\Exclude
      */
     private $messages;
 

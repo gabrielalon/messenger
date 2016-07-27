@@ -12,7 +12,6 @@ use AppBundle\Controller\BaseController;
 use AppBundle\Repository\MessageAuthorRepositoryAwareTrait;
 use AppBundle\Repository\MessageRepositoryAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -42,10 +41,6 @@ class ShowController extends BaseController
      *     path         = "/{_locale}/message_author/show/{authorId}/{page}",
      *     name         = "message_author_show_paginated",
      *     requirements = {"authorId": "\d+", "page": "[1-9]\d*"}
-     * )
-     *
-     * @Cache(
-     *     maxage = 3600
      * )
      *
      * @Template(

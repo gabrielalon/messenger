@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'homepage' %}
+
+{% block body %}
+    <h1>{{ 'title.edit_message'|trans }}</h1>
+
+    {{ include('message/_form.html.twig', {
+        form: form,
+        path_back_to_list: path('message_list'),
+        label_save_message: 'label.save_message'
+    }, with_context = false) }}
+{% endblock %}

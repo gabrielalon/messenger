@@ -4,12 +4,14 @@ namespace AppBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class Message
  * @package AppBundle\Model
  * @ORM\Table
  * @ORM\Entity(repositoryClass="AppBundle\Repository\MessageRepository")
+ * @Serializer\XmlRoot("message")
  */
 class Message
 {
@@ -45,6 +47,7 @@ class Message
      *     cascade = {"persist"}
      * )
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     * @Serializer\Exclude
      */
     private $author;
 
