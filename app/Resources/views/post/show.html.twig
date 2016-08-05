@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'homepage' %}
+
+{% block body %}
+    <div class="col-sm-9 blog-main">
+
+        <div class="blog-post">
+            <h2 class="blog-post-title">{{ post.title }}</h2>
+            <p class="blog-post-meta">
+                {{ post.publishedAt|date('Y-m-d H:i:s') }} by {{ post.getUser().username }}
+            </p>
+
+            {{ post.getContent()|md2html }}
+        </div>
+    </div>
+{% endblock %}

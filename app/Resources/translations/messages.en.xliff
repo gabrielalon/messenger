@@ -14,7 +14,19 @@
                 <source>title.edit_message</source>
                 <target>Edit message</target>
             </trans-unit>
+            <trans-unit id="title.login">
+                <source>title.login</source>
+                <target>Secure login</target>
+            </trans-unit>
 
+            <trans-unit id="label.login">
+                <source>label.login</source>
+                <target>Login</target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Password</target>
+            </trans-unit>
             <trans-unit id="label.author_name">
                 <source>label.author_name</source>
                 <target>Your name</target>
@@ -69,6 +81,14 @@
                 <source>menu.message_author_list</source>
                 <target>Contact list</target>
             </trans-unit>
+            <trans-unit id="menu.post_list">
+                <source>menu.post_list</source>
+                <target>Posts</target>
+            </trans-unit>
+            <trans-unit id="menu.logout">
+                <source>menu.logout</source>
+                <target>Sign out</target>
+            </trans-unit>
 
             <trans-unit id="action.back_to_list">
                 <source>action.back_to_list</source>
@@ -81,6 +101,10 @@
             <trans-unit id="action.message_edit">
                 <source>action.message_edit</source>
                 <target>Edit message</target>
+            </trans-unit>
+            <trans-unit id="action.sign_in">
+                <source>action.sign_in</source>
+                <target>Sign in</target>
             </trans-unit>
 
             <trans-unit id="info.no_messages_found">

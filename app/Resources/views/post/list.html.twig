@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'homepage' %}
+
+{% block body %}
+    <div class="col-sm-8 blog-main">
+        {% for post in posts %}
+            <div class="blog-post">
+                <a href="{{ path('post_show', { postId: post.id }) }}">
+                    <h2 class="blog-post-title">{{ post.title }}</h2>
+                </a>
+                <p class="blog-post-meta">
+                    {{ post.publishedAt|date('Y-m-d H:i:s') }} by {{ post.getUser().username }}
+                </p>
+            </div>
+        {% else %}
+            <div class="well">{{ 'info.no_posts_found'|trans }}</div>
+        {% endfor %}
+
+        <div class="navigation text-center">
+            {{ pagerfanta(posts, 'twitter_bootstrap3_translated', { routeName: 'post_list_paginated' }) }}
+        </div>
+    </div>
+{% endblock %}

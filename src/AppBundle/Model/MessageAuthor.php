@@ -4,7 +4,6 @@ namespace AppBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -27,13 +26,11 @@ class MessageAuthor
 
     /**
      * @ORM\Column(type="datetime")
-     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 

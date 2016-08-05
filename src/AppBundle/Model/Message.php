@@ -3,7 +3,6 @@
 namespace AppBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -26,7 +25,6 @@ class Message
 
     /**
      * @ORM\Column(type="datetime")
-     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 

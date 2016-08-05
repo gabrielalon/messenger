@@ -34,3 +34,9 @@ Konfiguracja apache:
 </VirtualHost>
 
 Może być pomocne wykonanie chmod -R +a na katalogy cache
+
+Instalacja MongoDB
+==================
+
+Najpierw http://digitallyyours.in/2015/09/30/setting-up-mongodb-on-mac-osx-and-xampp/
+W razie problemów http://apple.stackexchange.com/questions/211640/installation-failure-the-mongodb-driver-for-php-on-el-capitan

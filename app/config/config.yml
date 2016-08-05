@@ -1,12 +1,12 @@
 parameters:
     locale: pl
     app_locales: en|pl
+    mongodb_server: "mongodb://localhost:27017"
 
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: doctrine_extensions.yml }
 
 framework:
     esi:             { enabled: true }
@@ -60,27 +60,27 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         mappings:
-            translatable:
-                type: annotation
-                alias: Gedmo
-                prefix: Gedmo\Translatable\Entity
-                # make sure vendor library location is correct
-                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
-            loggable:
-                type: annotation
-                alias: Gedmo
-                prefix: Gedmo\Loggable\Entity
-                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
-            tree:
-                type: annotation
-                alias: Gedmo
-                prefix: Gedmo\Tree\Entity
-                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
             AppBundle:
                 type: annotation
                 prefix: AppBundle\Model\
                 dir: "%kernel.root_dir%/../src/AppBundle/Model/"
                 is_bundle: false
+
+doctrine_mongodb:
+    connections:
+        default:
+            server: "%mongodb_server%"
+            options: {}
+    default_database: messenger
+    document_managers:
+        default:
+            auto_mapping: true
+
+#FOS User
+fos_user:
+    db_driver: mongodb
+    firewall_name: main
+    user_class: AppBundle\Document\User
 
 # Swiftmailer Configuration
 swiftmailer:

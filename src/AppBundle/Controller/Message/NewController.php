@@ -48,7 +48,10 @@ class NewController extends BaseController
     {
         $message = new Message();
 
-        $messageAuthor = null;
+        $messageAuthor = new MessageAuthor();
+        $messageAuthor->setCreatedAt(new \DateTime());
+        $messageAuthor->setUpdatedAt(new \DateTime());
+
         if ($request->isMethod('POST')) {
             $messageData = $request->get('message');
             /** @var MessageAuthor $messageAuthor */
@@ -56,12 +59,7 @@ class NewController extends BaseController
                 ->findOneByEmail($messageData['author']['email']);
         }
 
-        if ($messageAuthor) {
-            $message->setAuthor($messageAuthor);
-        } else {
-            $message->setAuthor(new MessageAuthor());
-        }
-
+        $message->setAuthor($messageAuthor);
         $form = $this->createForm(MessageType::class, $message, array(
             'action' => $this->generateUrl('message_new'),
             'method' => 'POST'
@@ -69,6 +67,8 @@ class NewController extends BaseController
 
         $form->handleRequest($request);
         if ($form->isValid()) {
+            $message->setCreatedAt(new \DateTime());
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($message);
             $entityManager->flush();

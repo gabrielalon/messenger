@@ -11,6 +11,12 @@ services:
         calls:
              - [setMessageRepository, ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:Message")']]
 
+    abstract_post_controller:
+        parent: abstract_controller
+        abstract: true
+        calls:
+             - [setPostRepository, ['@=service("doctrine_mongodb").getRepository("AppBundle:Post")']]
+
     abstract_message_author_controller:
         parent: abstract_controller
         abstract: true
@@ -52,6 +58,22 @@ services:
         class: 'AppBundle\Controller\MessageAuthor\ShowController'
         calls:
              - [setMessageRepository, ['@=service("doctrine.orm.entity_manager").getRepository("AppBundle:Message")']]
+
+    security_login_controller:
+        parent: abstract_controller
+        class: 'AppBundle\Controller\Security\LoginController'
+
+    security_logout_controller:
+        parent: abstract_controller
+        class: 'AppBundle\Controller\Security\LogoutController'
+
+    post_list_controller:
+        parent: abstract_post_controller
+        class: 'AppBundle\Controller\Post\ListController'
+
+    post_show_controller:
+        parent: abstract_post_controller
+        class: 'AppBundle\Controller\Post\ShowController'
 
     api_main_index_controller:
         parent: abstract_controller

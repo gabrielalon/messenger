@@ -8,3 +8,6 @@ imports:
 services:
     markdown:
         class: AppBundle\Utils\Markdown
+
+    fos_user.doctrine_registry:
+        alias: doctrine_mongodb

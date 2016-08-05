@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'login' %}
+
+{% block main %}
+    <div class="alert alert-info">
+        {{ trans(error.messageData, 'security') }}
+    </div>
+{% endblock %}
