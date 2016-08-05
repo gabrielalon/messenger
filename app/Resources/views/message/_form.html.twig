@@ -2,7 +2,7 @@
     {{ form_errors(form) }}
     {{ form_widget(form) }}
 
-    <input type="submit" value="{{ label_save_message|default('label.create_message')|trans }}" class="btn btn-primary" />
+    <input type="submit" value="{{ label_save_message|default('label.create_message')|trans }}" id="messageSubmit" class="btn btn-primary" />
 
     <a href="{{ path_back_to_list|default(path('message_list')) }}" class="btn btn-link">
         {{ 'action.back_to_list'|trans }}

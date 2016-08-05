@@ -4,7 +4,6 @@ namespace AppBundle\Repository;
 
 use AppBundle\Model\Message;
 use AppBundle\Model\MessageAuthor;
-use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
@@ -16,6 +15,22 @@ use Pagerfanta\Pagerfanta;
  */
 class MessageRepository extends EntityRepository
 {
+    /**
+     * @param $term
+     *
+     * @return array
+     */
+    public function findAllLikeContent($term)
+    {
+        $queryBuilder = $this->createQueryBuilder('m');
+
+        return $queryBuilder
+            ->select('m')
+            ->where( $queryBuilder->expr()->like('m.content', $queryBuilder->expr()->literal('%' . $term . '%')) )
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @param int $page
      *

@@ -40,3 +40,16 @@ Instalacja MongoDB
 
 Najpierw http://digitallyyours.in/2015/09/30/setting-up-mongodb-on-mac-osx-and-xampp/
 W razie problemów http://apple.stackexchange.com/questions/211640/installation-failure-the-mongodb-driver-for-php-on-el-capitan
+
+Wgranie przykładowych danych
+============================
+
+1. php bin/console doctrine:fixtures:load
+2. php bin/console doctrine:mongodb:fixtures:load (przedtem trzeba uruchomić mongo cd mongodb/bin/, ./mongod)
+
+Testy
+=====
+
+* Behat (vendor/bin/behat --init)
+1. java -jar ~/Downloads/selenium-server-standalone-2.45.0.jar
+2. vendor/bin/behat

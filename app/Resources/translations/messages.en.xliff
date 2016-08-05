@@ -18,6 +18,10 @@
                 <source>title.login</source>
                 <target>Secure login</target>
             </trans-unit>
+            <trans-unit id="title.welcome">
+                <source>title.welcome</source>
+                <target>Hello</target>
+            </trans-unit>
 
             <trans-unit id="label.login">
                 <source>label.login</source>
@@ -60,6 +64,11 @@
                 <target>Cancel</target>
             </trans-unit>
 
+            <trans-unit id="placeholder.search">
+                <source>placeholder.search</source>
+                <target>Search</target>
+            </trans-unit>
+
             <trans-unit id="delete_message_modal.title">
                 <source>delete_message_modal.title</source>
                 <target>Message delete</target>
@@ -75,11 +84,11 @@
             </trans-unit>
             <trans-unit id="menu.message_list">
                 <source>menu.message_list</source>
-                <target>Message list</target>
+                <target>Messages</target>
             </trans-unit>
             <trans-unit id="menu.message_author_list">
                 <source>menu.message_author_list</source>
-                <target>Contact list</target>
+                <target>Contacts</target>
             </trans-unit>
             <trans-unit id="menu.post_list">
                 <source>menu.post_list</source>
@@ -88,6 +97,10 @@
             <trans-unit id="menu.logout">
                 <source>menu.logout</source>
                 <target>Sign out</target>
+            </trans-unit>
+            <trans-unit id="menu.login">
+                <source>menu.login</source>
+                <target>Sign in</target>
             </trans-unit>
 
             <trans-unit id="action.back_to_list">

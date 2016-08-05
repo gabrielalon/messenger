@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Message
 {
-    const NUM_ITEMS = 3;
+    const NUM_ITEMS = 8;
 
     /**
      * @ORM\Id

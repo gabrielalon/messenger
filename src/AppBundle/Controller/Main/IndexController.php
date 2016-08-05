@@ -4,14 +4,16 @@ namespace AppBundle\Controller\Main;
 
 use AppBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Class IndexController
  * @package AppBundle\Controller\Home
- * @Route(service="main_index_controller")
+ *
+ * @Route(
+ *     service = "main_index_controller"
+ * )
  */
 class IndexController extends BaseController
 {
@@ -26,10 +28,6 @@ class IndexController extends BaseController
      * @Route(
      *     path = "/{_locale}/",
      *     name = "homepage_locale"
-     * )
-     *
-     * @Cache(
-     *     maxage = 3600
      * )
      *
      * @Template(

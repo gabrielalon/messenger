@@ -31,6 +31,10 @@ services:
         parent: abstract_message_controller
         class: 'AppBundle\Controller\Message\ListController'
 
+    message_search_controller:
+        parent: abstract_message_controller
+        class: 'AppBundle\Controller\Message\SearchController'
+
     message_show_controller:
         parent: abstract_message_controller
         class: 'AppBundle\Controller\Message\ShowController'

@@ -1,10 +1,12 @@
 <div class="col-sm-8 blog-main">
     {% for message in messages %}
         <div class="blog-post">
-            <h2 class="blog-post-title">{{ message.content[:20] ~ '...' }}</h2>
+            <a href="{{ path('message_show', { messageId: message.id }) }}">
+                <h2 class="blog-post-title">{{ message.content[:40] ~ '...' }}</h2>
+            </a>
             <p class="blog-post-meta">
                 {{ message.createdAt|date('Y-m-d H:i:s') }} by
-                <a href="{{ path('message_show', { messageId: message.id }) }}">
+                <a href="{{ path('message_author_show', { authorId: message.authorId }) }}">
                     {{ message.getAuthor().name }}
                 </a>
             </p>

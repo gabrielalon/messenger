@@ -1,0 +1,7 @@
+default:
+    extensions:
+        Behat\MinkExtension:
+            base_url: http://messenger.local
+            goutte: ~
+#            selenium2: ~
+#            browser_name: 'chrome'

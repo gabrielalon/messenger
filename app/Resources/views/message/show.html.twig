@@ -45,7 +45,12 @@
             {{ form_end(form) }}
 
             <br />
+
             <a href="{{ path('message_edit', {messageId: message.id}) }}" class="btn btn-lg btn-block btn-info">{{ 'action.message_edit'|trans }}</a>
+
+            <br />
+
+            <a href="{{ path('message_list') }}" class="btn btn-lg btn-block btn-primary">{{ 'action.back_to_list'|trans }}</a>
         </div>
     </div>
 {% endblock %}

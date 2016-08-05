@@ -48,15 +48,18 @@ class NewController extends BaseController
     {
         $message = new Message();
 
-        $messageAuthor = new MessageAuthor();
-        $messageAuthor->setCreatedAt(new \DateTime());
-        $messageAuthor->setUpdatedAt(new \DateTime());
-
+        $messageAuthor = null;
         if ($request->isMethod('POST')) {
             $messageData = $request->get('message');
             /** @var MessageAuthor $messageAuthor */
             $messageAuthor = $this->messageAuthorRepository
                 ->findOneByEmail($messageData['author']['email']);
+        }
+
+        if (!$messageAuthor) {
+            $messageAuthor = new MessageAuthor();
+            $messageAuthor->setCreatedAt(new \DateTime());
+            $messageAuthor->setUpdatedAt(new \DateTime());
         }
 
         $message->setAuthor($messageAuthor);
