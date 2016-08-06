@@ -53,3 +53,12 @@ Testy
 * Behat (vendor/bin/behat --init)
 1. java -jar ~/Downloads/selenium-server-standalone-2.45.0.jar
 2. vendor/bin/behat
+
+Przydatne
+=========
+
+1. git clone https://github.com/mathiasbynens/dotfiles.git && cd dotfiles && source bootstrap.sh
+2. https://gielberkers.com/setup-php-codesniffer-phpstorm-osx/
+3. https://plugins.jetbrains.com/plugin/7320
+4. brew install tig
+5. brew install git-flow
