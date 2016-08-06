@@ -62,3 +62,5 @@ Przydatne
 3. https://plugins.jetbrains.com/plugin/7320
 4. brew install tig
 5. brew install git-flow
+6. https://coderwall.com/p/d3uo3w/git-gpg-know-thy-commits (jak się popsuje gdk)
+7. https://github.com/dimsav/phpspec-reference
